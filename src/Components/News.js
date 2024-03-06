@@ -10,14 +10,16 @@ export class News extends Component {
         this.state = {
             articles: [],
             loading: false,
-            page: 1
+            page: 1,
+            totalResultsFetch: 0
         }
     }
     async componentDidMount() {
-        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${pageSize}`
+        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${pageSize}&page=${this.state.page}`
         const response = await fetch(url);
         const parsedResponse = await response.json()
         this.setState({ articles: parsedResponse.articles })
+        this.setState({ totalResultsFetch: parsedResponse.totalResults })
     }
     render() {
         return (
