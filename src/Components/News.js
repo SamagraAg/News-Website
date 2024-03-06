@@ -36,9 +36,9 @@ export class News extends Component {
                     </div>
                 </div>
                 <div className="container mt-3 d-flex justify-content-between">
-                    <button type="button" className="btn btn-dark btn-sm">&laquo; Previous</button>
+                    <button disabled={this.state.page <= 1} type="button" className="btn btn-dark btn-sm">&laquo; Previous</button>
                     <p>Page: {this.state.page}</p>
-                    <button type="button" className="btn btn-dark btn-sm">Next &raquo;</button>
+                    <button disabled={this.state.page + 1 > (this.state.totalResultsFetch / pageSize)} type="button" className="btn btn-dark btn-sm">Next &raquo;</button>
                 </div>
             </div>
         )
