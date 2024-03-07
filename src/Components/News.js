@@ -16,7 +16,7 @@ export class News extends Component {
         }
     }
     async componentDidMount() {
-        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${pageSize}&page=${this.state.page}`
+        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page}`
         const response = await fetch(url);
         const parsedResponse = await response.json()
         this.setState({ articles: parsedResponse.articles, totalResultsFetch: parsedResponse.totalResults, loading: false })
@@ -24,7 +24,7 @@ export class News extends Component {
     handlePrevClick = async () => {
         this.setState({ loading: true });
         console.log(`Prev Click`);
-        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${pageSize}&page=${this.state.page - 1}`
+        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page - 1}`
         const response = await fetch(url);
         const parsedResponse = await response.json()
         this.setState({ articles: parsedResponse.articles, page: this.state.page - 1, loading: false })
@@ -32,7 +32,7 @@ export class News extends Component {
     handleNextClick = async () => {
         this.setState({ loading: true });
         console.log(`Next Click`);
-        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${pageSize}&page=${this.state.page + 1}`
+        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page + 1}`
         const response = await fetch(url);
         const parsedResponse = await response.json()
         this.setState({ articles: parsedResponse.articles, page: this.state.page + 1, loading: false })
@@ -55,7 +55,7 @@ export class News extends Component {
                 <div className="container mt-3 d-flex justify-content-between">
                     <button disabled={this.state.page <= 1} type="button" className="btn btn-dark btn-sm" onClick={this.handlePrevClick}>&laquo; Previous</button>
                     <p>Page: {this.state.page}</p>
-                    <button disabled={this.state.page + 1 > (this.state.totalResultsFetch / pageSize)} type="button" className="btn btn-dark btn-sm" onClick={this.handleNextClick}>Next &raquo;</button>
+                    <button disabled={this.state.page + 1 > (this.state.totalResultsFetch / this.props.pageSize)} type="button" className="btn btn-dark btn-sm" onClick={this.handleNextClick}>Next &raquo;</button>
                 </div>
             </div>
         )
