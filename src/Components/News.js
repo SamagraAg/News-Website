@@ -3,7 +3,6 @@ import NewsItem from './NewsItem'
 import Loading from './Loading'
 
 const apiKey = "d0081e97c02642b0a7efae8e5d07a213"
-const pageSize = 9
 
 export class News extends Component {
     constructor() {
@@ -16,7 +15,8 @@ export class News extends Component {
         }
     }
     async componentDidMount() {
-        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page}`
+        const url = `https://newsapi.org/v2/top-headlines?category=${this.props.category
+            }&country=${this.props.country}&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page}`
         const response = await fetch(url);
         const parsedResponse = await response.json()
         this.setState({ articles: parsedResponse.articles, totalResultsFetch: parsedResponse.totalResults, loading: false })
@@ -24,7 +24,8 @@ export class News extends Component {
     handlePrevClick = async () => {
         this.setState({ loading: true });
         console.log(`Prev Click`);
-        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page - 1}`
+        const url = `https://newsapi.org/v2/top-headlines?category=${this.props.category
+            }&country=${this.props.country}&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page - 1}`
         const response = await fetch(url);
         const parsedResponse = await response.json()
         this.setState({ articles: parsedResponse.articles, page: this.state.page - 1, loading: false })
@@ -32,7 +33,8 @@ export class News extends Component {
     handleNextClick = async () => {
         this.setState({ loading: true });
         console.log(`Next Click`);
-        const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page + 1}`
+        const url = `https://newsapi.org/v2/top-headlines?category=${this.props.category
+            }&country=${this.props.country}&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page + 1}`
         const response = await fetch(url);
         const parsedResponse = await response.json()
         this.setState({ articles: parsedResponse.articles, page: this.state.page + 1, loading: false })
