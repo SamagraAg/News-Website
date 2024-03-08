@@ -54,7 +54,7 @@ export class News extends Component {
         return (
             <div>
                 <div className='container my-2'>
-                    <h1 className='text-center'>Top Headlines</h1>
+                    <h1 className='text-center text-warning'>Top Headlines</h1>
                     {this.state.loading && <Loading></Loading>}
                     <div className="row">
                         {!this.state.loading && this.state.articles.map((article) => {
@@ -66,9 +66,9 @@ export class News extends Component {
                     </div>
                 </div>
                 <div className="container mt-3 d-flex justify-content-between">
-                    <button disabled={this.state.page <= 1} type="button" className="btn btn-dark btn-sm" onClick={this.handlePrevClick}>&laquo; Previous</button>
+                    <button disabled={this.state.page <= 1} type="button" className="btn btn-danger btn-sm" onClick={this.handlePrevClick}>&laquo; Previous</button>
                     <p>Page: {this.state.page}</p>
-                    <button disabled={this.state.page + 1 > (this.state.totalResultsFetch / this.props.pageSize)} type="button" className="btn btn-dark btn-sm" onClick={this.handleNextClick}>Next &raquo;</button>
+                    <button disabled={this.state.page + 1 > (this.state.totalResultsFetch / this.props.pageSize)} type="button" className="btn btn-danger btn-sm" onClick={this.handleNextClick}>Next &raquo;</button>
                 </div>
             </div>
         )
