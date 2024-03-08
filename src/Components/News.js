@@ -54,12 +54,12 @@ export class News extends Component {
         return (
             <div>
                 <div className='container my-2'>
-                    <h1 className='text-center text-warning'>Top Headlines</h1>
+                    <h1 className='text-center' style={{color:"#FFE5AD"}}>Top Headlines</h1>
                     {this.state.loading && <Loading></Loading>}
                     <div className="row">
                         {!this.state.loading && this.state.articles.map((article) => {
                             return <div className="col-md-4" key={article.url}>
-                                <NewsItem title={article.title} description={article.description} imageUrl={article.urlToImage} url={article.url}></NewsItem>
+                                <NewsItem title={article.title} description={article.description} imageUrl={article.urlToImage} url={article.url} author={article.author} date={article.publishedAt} NewsSource={article.source.name}></NewsItem>
                             </div>
                         })}
 
