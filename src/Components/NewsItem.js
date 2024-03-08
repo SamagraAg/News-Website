@@ -8,7 +8,7 @@ export default class NewsItem extends Component {
         return (
             <div>
                 <div className="my-2 mx-4 card">
-                    <img src={imageUrl != null ? imageUrl : defaultImgUrl} style={{width: "100%", height: "12rem" }} className="card-img-top" alt="..." />
+                    <img src={imageUrl != null ? imageUrl : defaultImgUrl} style={{height: "12rem" }} className="card-img-top" alt="..." />
                     <div style={{backgroundColor:"black", color:"white"}} className="card-body">
                         <h5 className="card-title">{title}</h5>
                         <p className="card-text">{description}</p>
