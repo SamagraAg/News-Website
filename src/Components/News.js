@@ -1,10 +1,21 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import Loading from './Loading'
+import PropTypes from 'prop-types';
 
 const apiKey = "d0081e97c02642b0a7efae8e5d07a213"
 
 export class News extends Component {
+    static propTypes = {
+        pageSize: PropTypes.number,
+        country: PropTypes.string,
+        category: PropTypes.string
+    };
+    static defaultProps = {
+        pageSize: 9,
+        country: "in",
+        category: "general"
+    }
     constructor() {
         super()
         this.state = {
