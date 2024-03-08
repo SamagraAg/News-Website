@@ -25,36 +25,30 @@ export class News extends Component {
             totalResultsFetch: 0
         }
     }
-    async componentDidMount() {
+    async updateNews() {
+        this.setState({ loading: true });
         const url = `https://newsapi.org/v2/top-headlines?category=${this.props.category
             }&country=${this.props.country}&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page}`
         const response = await fetch(url);
         const parsedResponse = await response.json()
         this.setState({ articles: parsedResponse.articles, totalResultsFetch: parsedResponse.totalResults, loading: false })
     }
+    async componentDidMount() {
+        this.updateNews()
+    }
     handlePrevClick = async () => {
-        this.setState({ loading: true });
-        console.log(`Prev Click`);
-        const url = `https://newsapi.org/v2/top-headlines?category=${this.props.category
-            }&country=${this.props.country}&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page - 1}`
-        const response = await fetch(url);
-        const parsedResponse = await response.json()
-        this.setState({ articles: parsedResponse.articles, page: this.state.page - 1, loading: false })
+        this.setState({page: this.state.page - 1})
+        this.updateNews()
     }
     handleNextClick = async () => {
-        this.setState({ loading: true });
-        console.log(`Next Click`);
-        const url = `https://newsapi.org/v2/top-headlines?category=${this.props.category
-            }&country=${this.props.country}&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page + 1}`
-        const response = await fetch(url);
-        const parsedResponse = await response.json()
-        this.setState({ articles: parsedResponse.articles, page: this.state.page + 1, loading: false })
+        this.setState({page: this.state.page +1})
+        this.updateNews()
     }
     render() {
         return (
             <div>
                 <div className='container my-2'>
-                    <h1 className='text-center' style={{color:"#FFE5AD"}}>Top Headlines</h1>
+                    <h1 className='text-center' style={{ color: "#FFE5AD" }}>Top Headlines</h1>
                     {this.state.loading && <Loading></Loading>}
                     <div className="row">
                         {!this.state.loading && this.state.articles.map((article) => {
@@ -67,7 +61,7 @@ export class News extends Component {
                 </div>
                 <div className="container mt-3 d-flex justify-content-between">
                     <button disabled={this.state.page <= 1} type="button" className="btn btn-danger btn-sm" onClick={this.handlePrevClick}>&laquo; Previous</button>
-                    <p>Page: {this.state.page}</p>
+                    <p className='text-light'>Page: {this.state.page}</p>
                     <button disabled={this.state.page + 1 > (this.state.totalResultsFetch / this.props.pageSize)} type="button" className="btn btn-danger btn-sm" onClick={this.handleNextClick}>Next &raquo;</button>
                 </div>
             </div>
