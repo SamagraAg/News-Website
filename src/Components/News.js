@@ -4,7 +4,9 @@ import Loading from './Loading'
 import PropTypes from 'prop-types';
 
 const apiKey = "d0081e97c02642b0a7efae8e5d07a213"
-
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 export class News extends Component {
     static propTypes = {
         pageSize: PropTypes.number,
@@ -16,14 +18,15 @@ export class News extends Component {
         country: "in",
         category: "general"
     }
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             articles: [],
             loading: true,
             page: 1,
             totalResultsFetch: 0
         }
+        document.title = `NewsMonkey - ${capitalizeFirstLetter(this.props.category)}`
     }
     async updateNews() {
         this.setState({ loading: true });
@@ -37,18 +40,18 @@ export class News extends Component {
         this.updateNews()
     }
     handlePrevClick = async () => {
-        this.setState({page: this.state.page - 1})
+        this.setState({ page: this.state.page - 1 })
         this.updateNews()
     }
     handleNextClick = async () => {
-        this.setState({page: this.state.page +1})
+        this.setState({ page: this.state.page + 1 })
         this.updateNews()
     }
     render() {
         return (
             <div>
                 <div className='container my-2'>
-                    <h1 className='text-center' style={{ color: "#FFE5AD" }}>Top Headlines</h1>
+                    <h1 className='text-center' style={{ color: "#FFE5AD" }}>Top {capitalizeFirstLetter(this.props.category)} Headlines</h1>
                     {this.state.loading && <Loading></Loading>}
                     <div className="row">
                         {!this.state.loading && this.state.articles.map((article) => {
