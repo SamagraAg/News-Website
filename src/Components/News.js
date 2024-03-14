@@ -13,7 +13,7 @@ const News = (props) => {
     const [page, setPage] = useState(1)
     const [totalResultsFetch, setTotalResultsFetch] = useState(0)
 
-    document.title = `NewsMonkey - ${capitalizeFirstLetter(props.category)}`
+    document.title = `KhabarDaar - ${capitalizeFirstLetter(props.category)}`
     const loadNews = async () => {
         const url = `https://newsapi.org/v2/top-headlines?category=${props.category
             }&country=${props.country}&apiKey=${props.apiKey}&pageSize=${props.pageSize}&page=${page}`
@@ -27,9 +27,9 @@ const News = (props) => {
         loadNews()
     }, [])
     const fetchMoreData = async () => {
-        setPage(page + 1)
         const url = `https://newsapi.org/v2/top-headlines?category=${props.category
-            }&country=${props.country}&apiKey=${props.apiKey}&pageSize=${props.pageSize}&page=${page}`
+    }&country=${props.country}&apiKey=${props.apiKey}&pageSize=${props.pageSize}&page=${page+1}`
+    setPage(page + 1)
         const response = await fetch(url);
         const parsedResponse = await response.json()
         setArticles(articles.concat(parsedResponse.articles))
@@ -38,7 +38,7 @@ const News = (props) => {
         <>
             <InfiniteScroll dataLength={articles.length} next={fetchMoreData} hasMore={articles.length < totalResultsFetch} loader={<Loading></Loading>}>
                 <div className='container my-2'>
-                    <h1 className='text-center' style={{ color: "#FFE5AD" }}>Top {capitalizeFirstLetter(props.category)} Headlines</h1>
+                    <h1 className='text-center' style={{marginTop:"4rem",color: "#FFE5AD" }}>Top {capitalizeFirstLetter(props.category)} Headlines</h1>
                     {loading && <Loading></Loading>}
 
                     <div className="row">

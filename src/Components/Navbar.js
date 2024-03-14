@@ -4,7 +4,7 @@ const Navbar = () => {
 
     return (
         // <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#35374B" }} data-bs-theme="dark">
-        <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#820300" }} data-bs-theme="dark">
+        <nav className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: "#820300" }} data-bs-theme="dark">
             <div className="container-fluid">
                 <img src="favicon-32x32.png" alt="Logo" width="30" height="24" className="d-inline-block align-text-top " />
                 <Link className="mx-2 navbar-brand" to="/">KhabarDaar</Link>
