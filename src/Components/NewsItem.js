@@ -15,7 +15,7 @@ export default class NewsItem extends Component {
                     <div className="position-absolute top-0 translate-middle badge rounded-pill bg-success">{NewsSource}</div>
                     <img src={imageUrl != null ? imageUrl : defaultImgUrl} style={{ height: "12rem" }} className="card-img-top" alt="..." />
                     <div style={{ backgroundColor: "black", color: "white" }} className="card-body">
-                        <h5 className="card-title text-warning">{title}</h5>
+                        <h5 className="card-title text-warning">{title ? title : "NEWS"}</h5>
                         <p className="card-text">{description}</p>
                         <p className="card-text"><small className="text-light">By {!author ? "unknown" : author} on {this.getDate()}</small></p>
                         <a target='_blank' href={url} className="btn btn-sm btn-danger">Read More</a>
