@@ -31,7 +31,7 @@ export class News extends Component {
     }
     async componentDidMount() {
         const url = `https://newsapi.org/v2/top-headlines?category=${this.props.category
-            }&country=${this.props.country}&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page}`
+            }&country=${this.props.country}&apiKey=${this.props.apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page}`
         const response = await fetch(url);
         const parsedResponse = await response.json()
         this.setState({ articles: parsedResponse.articles, totalResultsFetch: parsedResponse.totalResults, loading: false })
@@ -39,7 +39,7 @@ export class News extends Component {
     fetchMoreData = async () => {
         this.setState({ page: this.state.page + 1 })
         const url = `https://newsapi.org/v2/top-headlines?category=${this.props.category
-            }&country=${this.props.country}&apiKey=${apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page}`
+            }&country=${this.props.country}&apiKey=${this.props.apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page}`
         const response = await fetch(url);
         const parsedResponse = await response.json()
         this.setState({ articles: this.state.articles.concat(parsedResponse.articles) })
